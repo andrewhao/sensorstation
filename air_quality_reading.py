@@ -1,5 +1,7 @@
 import requests
 import json
+import os
+
 from pms7003 import Pms7003Sensor, PmsSensorException
 
 class AirQualityReading:
