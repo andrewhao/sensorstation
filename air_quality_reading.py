@@ -7,7 +7,7 @@ class AirQualityReading:
         self.data = None
 
     def run(self):
-        self.data = this.sensor.read()
+        self.data = self.sensor.read()
         self.report(data)
         self.sensor.close()
 
