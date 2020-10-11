@@ -15,7 +15,7 @@ class AirQualityReading:
 
     def report(self, data):
         data['device_id'] = os.environ['HOSTNAME']
-        response = requests.post('http://thermonoto.herokuapp.com/air_quality_updates', data=json.dumps(data))
+        response = requests.post('https://thermonoto.herokuapp.com/air_quality_updates', json=data)
         print('Posting with', data)
         print(response)
 
