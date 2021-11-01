@@ -4,12 +4,19 @@ url = "https://pypi.org/simple"
 verify_ssl = true
 
 [dev-packages]
+black = "*"
 
 [packages]
 requests = "*"
-"RPi.GPIO" = "*"
+#"RPi.GPIO" = "*"
 adafruit-circuitpython-dht = "*"
 adafruit-blinka = "*"
 pms7003 = "*"
+opencv-contrib-python = "*"
+imutils = "*"
+numpy = "*"
 
 [requires]
+
+[pipenv]
+allow_prereleases = true
