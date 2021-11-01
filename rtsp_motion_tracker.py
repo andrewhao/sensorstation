@@ -2,8 +2,8 @@ import cv2
 import os
 import imutils
 import numpy as np
-import time
 import requests
+from datetime import datetime, timedelta
 
 
 URL = os.environ.get('WEBCAM_RTSP_URL', '')
@@ -14,7 +14,7 @@ def report_movement():
     data = dict(device_id=os.environ.get('HOSTNAME', None))
     print('Posting with', data)
     try:
-        response = requests.post('http://thermonoto.herokuapp.com/motion_detection', data=data)
+        response = requests.post('http://thermonoto.herokuapp.com/motion_detection_updates', data=data)
         print(response)
     except Exception:
         return None
@@ -30,7 +30,7 @@ def report_movement():
 
 # Number of frames to pass before changing the frame to compare the current
 # frame against
-FRAMES_TO_PERSIST = 10
+FRAMES_TO_PERSIST = 2
 
 # Minimum boxed area for a detected motion to count as actual motion
 # Use to filter out noise or small objects
@@ -38,10 +38,10 @@ MIN_SIZE_FOR_MOVEMENT = 2000
 
 # Minimum length of time where no motion is detected it should take
 #(in program cycles) for the program to declare that there is no movement
-MOVEMENT_DETECTED_PERSISTENCE = 10
+MOVEMENT_DETECTED_PERSISTENCE = 2
 
 # Time to rest before capturing another image from the feed
-SLEEP_INTERVAL_SECONDS = 1
+SLEEP_INTERVAL_SECONDS = 5
 
 # =============================================================================
 # CORE PROGRAM
@@ -54,15 +54,16 @@ cap = cv2.VideoCapture(URL, cv2.CAP_FFMPEG) if URL else cv2.VideoCapture(0)
 # Init frame variables
 first_frame = None
 next_frame = None
+last_frame_time = datetime.now()
 
 # Init display font and timeout counters
 font = cv2.FONT_HERSHEY_SIMPLEX
 delay_counter = 0
 movement_persistent_counter = 0
 
+
 # LOOP!
 while True:
-    time.sleep(SLEEP_INTERVAL_SECONDS)
 
     # Set transient motion detected as false
     transient_movement_flag = False
@@ -75,6 +76,15 @@ while True:
     if not ret:
         print("CAPTURE ERROR")
         continue
+
+    now_time = datetime.now()
+    
+    # discard frame if it's under the interval specified.
+    if now_time - last_frame_time < timedelta(seconds=SLEEP_INTERVAL_SECONDS):
+        continue
+
+    last_frame_time = now_time
+
 
     # Resize and save a greyscale version of the image
     frame = imutils.resize(frame, width = 750)
