@@ -3,10 +3,22 @@ import os
 import imutils
 import numpy as np
 import time
+import requests
+
 
 URL = os.environ.get('WEBCAM_RTSP_URL', '')
 SHOW_UI = os.environ.get('SHOW_UI', 'false') == 'true'
 os.environ['OPENCV_FFMPEG_CAPTURE_OPTIONS'] = 'rtsp_transport;udp'
+
+def report_movement():
+    data = dict(device_id=os.environ.get('HOSTNAME', None))
+    print('Posting with', data)
+    try:
+        response = requests.post('http://thermonoto.herokuapp.com/motion_detection', data=data)
+        print(response)
+    except Exception:
+        return None
+
 
 
 # Code adapted from https://github.com/methylDragon/opencv-motion-detector
@@ -29,7 +41,7 @@ MIN_SIZE_FOR_MOVEMENT = 2000
 MOVEMENT_DETECTED_PERSISTENCE = 10
 
 # Time to rest before capturing another image from the feed
-SLEEP_INTERVAL_SECONDS = 0.25
+SLEEP_INTERVAL_SECONDS = 1
 
 # =============================================================================
 # CORE PROGRAM
@@ -116,11 +128,13 @@ while True:
         movement_persistent_flag = True
         movement_persistent_counter = MOVEMENT_DETECTED_PERSISTENCE
 
+
     # As long as there was a recent transient movement, say a movement
     # was detected    
     if movement_persistent_counter > 0:
         text = "Movement Detected " + str(movement_persistent_counter)
         movement_persistent_counter -= 1
+        report_movement()
     else:
         text = "No Movement Detected"
 
