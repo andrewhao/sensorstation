@@ -12,9 +12,9 @@ requests = "*"
 adafruit-circuitpython-dht = "*"
 adafruit-blinka = "*"
 pms7003 = "*"
-opencv-contrib-python = "4.5.3.56"
 imutils = "*"
 numpy = "*"
+opencv-contrib-python = "==4.5.3.56"
 
 [requires]
 
