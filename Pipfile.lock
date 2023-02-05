@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "e79861021f8e53cfcf62e6b33bdca8ac00adc36f71b97dd6288677aa916bd503"
+            "sha256": "4d155bcb6c3e1d1e58e1806764c830fdd4f2c28c772a1df3b519cb54c8495d0e"
         },
         "pipfile-spec": 6,
         "requires": {},
@@ -19,7 +19,7 @@
                 "sha256:4ae1ecb8517fa22a0f7818f7a0db90f7e3feb414c6954d9048d9d16990eb5e6c",
                 "sha256:507019df93317375cfc232080f0a2e18e44526e3c012e8a6eb7c2143632ef9c0"
             ],
-            "index": "pypi",
+            "markers": "python_version >= '3.7'",
             "version": "==8.14.0"
         },
         "adafruit-circuitpython-busdevice": {
@@ -56,14 +56,14 @@
                 "sha256:15625f01c38b3073c5adcd150c2fa925954115cecb8b0b438de19485c0768d9b",
                 "sha256:34b6cabc2ffb375d18ee5f78b1f8960a6073f76aa582e7dbd52eb601da1de160"
             ],
-            "markers": "python_version >= '3.6'",
+            "markers": "python_full_version >= '3.6.0'",
             "version": "==3.40.2"
         },
         "adafruit-pureio": {
             "hashes": [
                 "sha256:2caf22fb07c7f771d83267f331a76cde314723f884a9570ea6f768730c87a879"
             ],
-            "markers": "python_version >= '3.5'",
+            "markers": "python_full_version >= '3.5.0'",
             "version": "==1.1.9"
         },
         "certifi": {
@@ -71,7 +71,7 @@
                 "sha256:35824b4c3a97115964b408844d64aa14db1cc518f6562e8d7261699d1350a9e3",
                 "sha256:4ad3232f5e926d6718ec31cfc1fcadfde020920e278684144551c91769c7bc18"
             ],
-            "markers": "python_version >= '3.6'",
+            "markers": "python_full_version >= '3.6.0'",
             "version": "==2022.12.7"
         },
         "charset-normalizer": {
@@ -173,7 +173,7 @@
                 "sha256:814f528e8dead7d329833b91c5faa87d60bf71824cd12a7530b5526063d02cb4",
                 "sha256:90b77e79eaa3eba6de819a0c442c0b4ceefc341a7a2ab77d7562bf49f425c5c2"
             ],
-            "markers": "python_version >= '3.5'",
+            "markers": "python_full_version >= '3.5.0'",
             "version": "==3.4"
         },
         "imutils": {
@@ -275,7 +275,7 @@
                 "sha256:2b4c7cb86dbadf044dfb9d3a4ff69fd217013dbe78a792177a3feb172449ea36",
                 "sha256:a4cc7404a203144754164b8b40994e2849fde1cfff06b08492f12fff9d9de7b9"
             ],
-            "markers": "python_version >= '3.6'",
+            "markers": "python_full_version >= '3.6.0'",
             "version": "==1.2.1"
         },
         "requests": {
