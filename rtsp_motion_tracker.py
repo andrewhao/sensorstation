@@ -5,7 +5,7 @@ import numpy as np
 import requests
 from datetime import datetime, timedelta
 
-
+THERMONOTO_CLOUD_BASE_URL = os.environ.get('THERMONOTO_CLOUD_BASE_URL', '')
 URL = os.environ.get('WEBCAM_RTSP_URL', '')
 SHOW_UI = os.environ.get('SHOW_UI', 'false') == 'true'
 os.environ['OPENCV_FFMPEG_CAPTURE_OPTIONS'] = 'rtsp_transport;udp'
@@ -14,7 +14,7 @@ def report_movement():
     data = dict(device_id=os.environ.get('HOSTNAME', None))
     print('Posting with', data)
     try:
-        response = requests.post('http://thermonoto.herokuapp.com/motion_detection_updates', data=data)
+        response = requests.post(f'{THERMONOTO_CLOUD_BASE_URL}/motion_detection_updates', data=data)
         print(response)
     except Exception:
         return None

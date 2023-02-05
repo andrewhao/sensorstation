@@ -4,6 +4,8 @@ import os
 
 from pms7003 import Pms7003Sensor, PmsSensorException
 
+THERMONOTO_CLOUD_BASE_URL = os.environ.get('THERMONOTO_CLOUD_BASE_URL', '')
+
 class AirQualityReading:
     def __init__(self):
         self.sensor = Pms7003Sensor('/dev/serial0');
@@ -15,7 +17,7 @@ class AirQualityReading:
 
     def report(self, data):
         data['device_id'] = os.environ['HOSTNAME']
-        response = requests.post('https://thermonoto.herokuapp.com/air_quality_updates', json=data)
+        response = requests.post(f'{THERMONOTO_CLOUD_BASE_URL}/air_quality_updates', json=data)
         print('Posting with', data)
         print(response)
 
