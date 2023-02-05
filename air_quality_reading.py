@@ -11,10 +11,14 @@ class AirQualityReading:
         self.sensor = Pms7003Sensor('/dev/serial0');
 
     def run(self):
-        data = self.sensor.read()
+        data = None
+        try:
+            data = self.sensor.read()
+        except PmsSensorException as e:
+            print(e)
+            raise(e)
         self.report(data)
         self.sensor.close()
-
     def report(self, data):
         data['device_id'] = os.environ['HOSTNAME']
         response = requests.post(f'{THERMONOTO_CLOUD_BASE_URL}/air_quality_updates', json=data)
